@@ -3,6 +3,7 @@ obj/*
 bin/*
 sln/*
 src/*
+.theos/*
 !sln/HonokaMiku.sln
 !sln/HonokaMiku.vcxproj
 !sln/HonokaMiku.vcxproj.filter
