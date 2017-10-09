@@ -190,8 +190,8 @@ int32_t GetGameProp(const char* str)
 }
 
 static char usage_string[] =
-	"Usage: %s <input file> [output file=input] [options]\n"
-	"<input file> and [output file] can be - for stdin and stdout.\n"
+	"Usage: %s <input file> <output file> [options]\n"
+	"<input file> and <output file> can be - for stdin and stdout.\n"
 	"\nOptions:\n"
 	" -b <name>                 Use basename <name> as decrypt/encrypt\n"
 	" -basename <name>          key. Required if reading from stdin.\n"
@@ -199,7 +199,7 @@ static char usage_string[] =
 	" -c[1|2|3]                 Assume <input file> is SIF CN game file.\n"
 	" -sif-cn[-v1|v2|v3]        Defaults to version 3\n"
 	"\n"
-	" -d                        Detect game file type only. [output file]\n"
+	" -d                        Detect game file type only. <output file>\n"
 	" -detect                   and the other parameters is omitted.\n"
 	"\n"
 	" -e                        Encrypt <input file> instead of decrypting\n"
@@ -332,7 +332,13 @@ void check_args(char* argv[])
 
 		exit(EINVAL);
 	}
-	if(g_OutPos == 0) g_OutPos = g_InPos;
+	if(g_OutPos == 0 && !g_TestMode)
+	{
+		fputs("Error: output file is missing\n\n", stderr);
+		fprintf(stderr, usage_string, g_ProgramName);
+
+		exit(EINVAL);
+	}
 
 	// Check basename
 	if((g_Basename != NULL && strlen(g_Basename)==0) || g_Basename == NULL)
