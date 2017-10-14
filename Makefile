@@ -7,6 +7,6 @@ include $(THEOS)/makefiles/common.mk
 
 TOOL_NAME = HonokaMiku
 HonokaMiku_FILES = $(wildcard src/*.cc)
-HonokaMiku_CFLAGS = -Wno-error
+HonokaMiku_CCFLAGS = -Wno-error
 
 include $(THEOS_MAKE_PATH)/tool.mk
